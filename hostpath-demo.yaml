@@ -13,5 +13,5 @@ spec:
       image: centos:7
       command: ["sleep", "12000"]
       volumeMounts:
-        - mountPath: /demo
+        - mountPath: /data
           name: hostpath
