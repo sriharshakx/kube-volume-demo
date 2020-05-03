@@ -7,7 +7,7 @@ spec:
     - name: hostpath
       hostPath:
         path: /demo
-        type: directory
+        type: Directory
   containers:
     - name: centos
       image: centos:7
