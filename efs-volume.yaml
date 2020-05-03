@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: efs-volume
 spec:
+  storageClassName: "efs"
   capacity:
     storage: 100Gi
   accessModes:
@@ -11,4 +12,36 @@ spec:
     server: fs-9b722931.efs.us-west-2.amazonaws.com
     path: "/"
 
-    
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: efs-pvc-claim1
+spec:
+  storageClassName: "efs"
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: efs-volume-demo
+spec:
+  volumes:
+    - name: efs-pvc-claim1
+      persistentVolumeClaim:
+        claimName: efs-pvc-claim1
+
+  containers:
+    - name: centos
+      image: centos:7
+      command:
+        - "sleep"
+        - "10000"
+      volumeMounts:
+        - mountPath: /data
+          name: efs-pvc-claim1
