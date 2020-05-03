@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      stotage: 50Gi
+      storage: 50Gi
 
