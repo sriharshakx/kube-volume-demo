@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-demo
+spec:
+  volumes:
+    - name: cache-dir
+      emptyDir: {}
+  containers:
+    - name: centos
+      image: centos:7
+      command: ["sleep", "12000"]
+      volumeMounts:
+        - mountPath: /data
+          name: cache-dir
+  
