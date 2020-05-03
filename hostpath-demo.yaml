@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-demo
+spec:
+  volumes:
+    - name: hostpath
+      hostPath:
+        path: /demo
+        type: directory
+  containers:
+    - name: centos
+      image: centos:7
+      command: ["sleep", "12000"]
+      volumeMounts:
+        - mountPath: /demo
+          name: hostpath
